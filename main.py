@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from vnstock3 import Vnstock
 import time
 import schedule
+from vnstock import *
 
 # Configuration
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
@@ -14,11 +15,7 @@ TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
 STATE_FILE = 'stock_state.json'
 
 # List of stocks to screen (Vietnam market)
-STOCK_UNIVERSE = [
-    'VNM', 'VIC', 'VHM', 'HPG', 'TCB', 'VCB', 'MSN', 'MBB', 'FPT', 'GAS',
-    'PLX', 'POW', 'SAB', 'VRE', 'NVL', 'VPB', 'CTG', 'BID', 'SSI', 'HDB',
-    'ACB', 'TPB', 'VNM', 'GVR', 'VCI', 'VHC', 'MWG', 'PNJ', 'REE', 'DIG'
-]
+STOCK_UNIVERSE = listing_companies()['ticker'].tolist()
 
 
 def calculate_rsi(data, period=14):
